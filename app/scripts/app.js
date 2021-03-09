@@ -9,15 +9,27 @@ function renderApp() {
     .initialized()
     .then((_client) => {
       window['client'] = _client;
-      notes.insertAdjacentHTML('beforebegin', `<li>App Initialized </li>`);
+      appLifeCycleEvent('Initialized');
 
-      client.events.on('app.activated', function () {
-        notes.insertAdjacentHTML('beforebegin', `<li>App Activated </li>`);
+      client.events.on('app.activated', () => {
+        appLifeCycleEvent('Activated');
+        client.iparams
+          .get()
+          .then((iparams) => {
+            Object.keys(iparams).forEach(function (key) {
+              notes.insertAdjacentHTML('beforeend', `<li>${key}:${iparams[key]}</li>`);
+            });
+          })
+          .catch(console.error);
       });
 
-      client.events.on('app.deactivated', function () {
-        notes.insertAdjacentHTML('beforebegin', `<li>App Deactivated </li>`);
+      client.events.on('app.deactivated', () => {
+        appLifeCycleEvent('Initialized');
       });
     })
     .catch(console.error);
+}
+
+function appLifeCycleEvent(state) {
+  return notes.insertAdjacentHTML('beforebegin', `<li>${state}</li>`);
 }
