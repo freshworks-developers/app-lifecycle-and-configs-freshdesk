@@ -27,7 +27,7 @@ h3 {
   grid-column: 1 / 2;
 }
 
-.secure-filed {
+.secure-field {
   grid-row: auto;
   grid-column: 3 / 4;
 }

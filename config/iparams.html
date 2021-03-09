@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/iparams.css" />
   </head>
   <body>
     <main>
@@ -48,6 +48,15 @@
           placeholder="subdomain.freshdesk.com"
           class="domain"
         ></fw-input>
+
+        <fw-input
+          label="Signature"
+          icon-right="grid"
+          placeholder="who's the creator of omnitrix"
+          autocomplete="on"
+          maxlength="25"
+          class="sign"
+        ></fw-input>
       </section>
     </main>
   </body>
@@ -57,6 +66,8 @@
     let selectedDate = document.querySelector('.datepicker');
     let domain = document.querySelector('.domain');
     let nameField = document.querySelector('.text-field');
+    let signature = document.querySelector('.sign');
+
     function postConfigs() {
       return {
         transformation: selectedVal.value,
@@ -66,13 +77,15 @@
       };
     }
 
-    function getConfigs(configs) {
-      console.log(configs);
+    function getConfigs({ date, name }) {
+      selectedDate.value = date;
+      nameField.value = name;
       return;
     }
 
     function validate() {
-      return true;
+      if (signature.value == 'azmuth') return true;
+      else return true;
     }
   </script>
   <script src="https://static.freshdev.io/fdk/2.0/assets/fresh_client.js"></script>
